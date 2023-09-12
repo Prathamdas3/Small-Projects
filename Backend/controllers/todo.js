@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -12,7 +11,7 @@ export const showTodoList = async (req, res) => {
 //showing individual todo
 export const showTodo = async (req, res) => {
   const { id } = req.params;
-  const todo = await prisma.todo.findUnique({ where: { id: parseInt(id) } });
+  const todo = await prisma.todo.findUnique({ where: { id: id } });
   res.json(todo);
 };
 
@@ -29,12 +28,12 @@ export const updateTodo = async (req, res) => {
   const { id } = req.params;
   const { title, description } = req.body;
 
-  const updateTodo = await prisma.todo.update({
-    where: { id: parseInt(id) },
+  const updatedTodo = await prisma.todo.update({
+    where: { id: id },
     data: { title, description },
   });
 
-  res.json(updateTodo);
+  res.json(updatedTodo);
 };
 
 //delete todo
@@ -42,7 +41,7 @@ export const deleteTodo = async (req, res) => {
   const { id } = req.params;
 
   const deleteTodo = await prisma.todo.delete({
-    where: { id: parseInt(id) },
+    where: { id: id },
   });
 
   res.json(deleteTodo);
