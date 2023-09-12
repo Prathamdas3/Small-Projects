@@ -11,8 +11,7 @@ datasource db {
 }
 
 model Todo {
-  id          Int      @id @default(autoincrement())
-  title       String   @unique
+  id          String @id @default(uuid())
+  title       String @unique
   description String
-  
 }
