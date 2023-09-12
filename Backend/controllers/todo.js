@@ -1,43 +1,49 @@
 import { v4 as uuidv4 } from 'uuid';
+import { PrismaClient } from '@prisma/client';
 
-let todoList = [];
+const prisma = new PrismaClient();
 
 //showing all the todo at one place
-export const showTodoList = (req, res) => {
-  res.send(todoList);
+export const showTodoList = async (req, res) => {
+  const todoList = await prisma.todo.findMany();
+  res.json(todoList);
 };
 
 //showing individual todo
-export const showTodo = (req, res) => {
+export const showTodo = async (req, res) => {
   const { id } = req.params;
-  const todo = todoList.find((todo) => id === todo.id);
-  res.send(todo);
+  const todo = await prisma.todo.findUnique({ where: { id: parseInt(id) } });
+  res.json(todo);
 };
 
 //creating todo
-export const addTodo = (req, res) => {
-  const todo = req.body;
-
-  todoList.push({ ...todo, id: uuidv4() });
-
-  res.send(todoList);
+export const addTodo = async (req, res) => {
+  const newTodo = await prisma.todo.create({
+    data: req.body,
+  });
+  res.json(newTodo);
 };
 
 //update todo
-export const updateTodo = (req, res) => {
+export const updateTodo = async (req, res) => {
   const { id } = req.params;
-  const { title, desc } = req.body;
-  const todo = todoList.find((todo) => id === todo.id);
+  const { title, description } = req.body;
 
-  if (title) todo.title = title;
-  if (desc) todo.desc = desc;
+  const updateTodo = await prisma.todo.update({
+    where: { id: parseInt(id) },
+    data: { title, description },
+  });
 
-  res.send(todoList);
+  res.json(updateTodo);
 };
 
 //delete todo
-export const deleteTodo = (req, res) => {
+export const deleteTodo = async (req, res) => {
   const { id } = req.params;
-  todoList = todoList.filter((todo) => id !== todo.id);
-  res.send(todoList);
+
+  const deleteTodo = await prisma.todo.delete({
+    where: { id: parseInt(id) },
+  });
+
+  res.json(deleteTodo);
 };

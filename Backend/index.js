@@ -8,8 +8,8 @@ const PORT = 5000;
 app.use(bodyParser.json());
 app.use('/todo', todoRoutes);
 
-app.get('/', (req, res) => {
-  res.send('Hello World');
+app.get('/', async (req, res) => {
+  res.send('welcome to our api');
 });
 
 app.listen(PORT, (req, res) => {
