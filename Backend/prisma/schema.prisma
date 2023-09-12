@@ -10,7 +10,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Todo {
+model Todos {
+  id          String @id @default(uuid())
+  title       String @unique
+  description String
+}
+
+model Notes {
   id          String @id @default(uuid())
   title       String @unique
   description String
