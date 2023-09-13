@@ -1,5 +1,5 @@
 import Clock from './Clock';
-import BackgroundImage from '../../Assets/Images/background.jpg';
+import BackgroundImage from '../../../Assets/Images/background.jpg';
 
 const sideDisplay = () => {
   return (
