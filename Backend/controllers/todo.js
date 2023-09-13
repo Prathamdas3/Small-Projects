@@ -24,11 +24,11 @@ export const addTodo = async (req, res) => {
 //update todo
 export const updateTodo = async (req, res) => {
   const { id } = req.params;
-  const { title, description } = req.body;
+  const { is_Complete } = req.body;
 
   const updatedTodo = await prisma.todos.update({
     where: { id: id },
-    data: { title, description },
+    data: { is_Complete },
   });
 
   res.json(updatedTodo);
