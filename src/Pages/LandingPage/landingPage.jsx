@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import ApiContext from '../../context/api/apiContext';
 import SideDisplay from './components/sideDisplay';
 import Card from './components/cards';
@@ -15,7 +16,9 @@ const landingPage = () => {
         <div className="grid lg:grid-cols-6 gap-10">
           {cardNames &&
             cardNames.map((cards) => (
-              <Card title={cards.title} key={cards.id} />
+              <Link to={cards.title} key={cards.id}>
+                <Card title={cards.title} key={cards.id} />
+              </Link>
             ))}
         </div>
       </div>

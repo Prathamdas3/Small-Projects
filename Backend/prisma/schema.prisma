@@ -14,7 +14,8 @@ model Todos {
   id          String @id @default(uuid())
   title       String @unique
   description String
-  is_Complete  Boolean
+  tags        String?
+  is_Complete Boolean @default(false)
 }
 
 model Notes {
