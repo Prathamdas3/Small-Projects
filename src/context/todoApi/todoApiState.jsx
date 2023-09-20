@@ -3,6 +3,7 @@ import todoApiContext from './todoApiContext';
 
 const apiState = (props) => {
   const [allData, setAllData] = useState();
+  const [oneData, setOneData] = useState();
 
   //getting all the todos
   const getData = async () => {
@@ -47,10 +48,29 @@ const apiState = (props) => {
     }
   };
 
+  //showing particular id
+  const showTodo = async (id) => {
+    const headers = {
+      'content-type': 'application/json',
+    };
+
+    const url = `http://localhost:5000/todo/${id}`;
+
+    try {
+      const data = await fetch(url, { method: 'GET', headers: headers });
+      const newData = await data.json();
+      setOneData(newData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const exportData = {
     allData,
     addData,
     getData,
+    showTodo,
+    oneData,
   };
 
   return (

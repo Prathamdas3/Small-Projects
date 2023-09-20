@@ -1,12 +1,13 @@
 import { useContext } from 'react';
 import TodoContext from '../../../context/todoApi/todoApiContext';
 const InputSection = () => {
-  const todoData = useContext(TodoContext).allData;
+  const todoData = useContext(TodoContext);
+
   return (
     <>
       <tbody>
-        {todoData &&
-          todoData.map((todo) => (
+        {todoData.allData &&
+          todoData.allData.map((todo) => (
             <tr>
               <th>
                 <label>
@@ -20,13 +21,14 @@ const InputSection = () => {
                   </div>
                 </div>
               </td>
-              <td>{todo.description}</td>
+              <td>{todo.description.slice(0, 35)}...</td>
               <td>{todo.tags}</td>
               <th>
                 <button
                   className="btn btn-success btn-xs mr-2"
                   onClick={() =>
-                    document.getElementById('my_modal_2').showModal()
+                    document.getElementById('my_modal_2').showModal() ||
+                    todoData.showTodo(todo.id)
                   }
                 >
                   Details
@@ -35,8 +37,10 @@ const InputSection = () => {
               </th>
               <dialog id="my_modal_2" className="modal">
                 <div className="modal-box">
-                  <h3 className="font-bold text-lg">{todo.title}</h3>
-                  <p className="py-4">{todo.description}</p>
+                  <h3 className="font-bold text-lg">
+                    {todoData.oneData.title}
+                  </h3>
+                  <p className="py-4">{todoData.oneData.description}</p>
                 </div>
                 <form method="dialog" className="modal-backdrop">
                   <button>close</button>
