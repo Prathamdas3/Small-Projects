@@ -42,7 +42,7 @@ const apiState = (props) => {
       });
       const jsonData = await setData.json();
 
-      setData();
+      getData();
     } catch (error) {
       console.log(error);
     }
@@ -65,12 +65,27 @@ const apiState = (props) => {
     }
   };
 
+  //deleting todo
+
+  const deleteTodo = async (id) => {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    const url = `http://localhost:5000/todo/${id}`;
+    try {
+      const data = await fetch(url, { method: 'DELETE', headers: headers });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const exportData = {
     allData,
     addData,
     getData,
     showTodo,
     oneData,
+    deleteTodo,
   };
 
   return (

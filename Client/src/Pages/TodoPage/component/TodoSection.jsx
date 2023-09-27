@@ -33,14 +33,21 @@ const InputSection = () => {
                 >
                   Details
                 </button>
-                <button className="btn btn-error btn-xs">Delete</button>
+                <button
+                  className="btn btn-error btn-xs"
+                  onClick={() => todoData.deleteTodo(todo.id)}
+                >
+                  Delete
+                </button>
               </th>
               <dialog id="my_modal_2" className="modal">
                 <div className="modal-box">
                   <h3 className="font-bold text-lg">
-                    {todoData.oneData.title}
+                    {todoData.oneData && todoData.oneData.title}
                   </h3>
-                  <p className="py-4">{todoData.oneData.description}</p>
+                  <p className="py-4">
+                    {todoData.oneData && todoData.oneData.description}
+                  </p>
                 </div>
                 <form method="dialog" className="modal-backdrop">
                   <button>close</button>
