@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import ApiContext from '../../context/api/apiContext';
+import { apiContext } from '../../context/apiContext';
 import SideDisplay from './components/sideDisplay';
 import Card from './components/cards';
 const landingPage = () => {
-  const cardNames = useContext(ApiContext);
+  const cardNames = useContext(apiContext);
   console.log(cardNames);
   return (
     <>
